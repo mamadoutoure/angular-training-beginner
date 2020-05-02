@@ -1,0 +1,73 @@
+<div class="card mt-2">
+
+
+  <!--  - card header -->
+  <div class="card-header bg-primary container">
+
+
+    <div class="row">
+      <div class="col text-white">
+        Prénom
+      </div>
+      <div class="col text-white">
+        Nom
+      </div>
+      <div class="col text-white">
+        Date de naissance
+      </div>
+      <div class="col text-white">
+        Lieu de naissance
+      </div>
+      <div class="col text-white">
+        Adresse
+      </div>
+      <div class="col text-white">
+        Contact
+      </div>
+      <div class="col text-white">
+        Actions
+      </div>
+    </div>
+
+
+    </div>
+
+  <!--  - card body -->
+  <div class="card-body bg-light" *ngFor="let client of clients">
+
+    <div class="row">
+      <div class="col">
+        {{client.firstName}}
+      </div>
+      <div class="col">
+        {{client.lastName}}
+      </div>
+      <div class="col">
+        {{client.dob}}
+      </div>
+      <div class="col">
+        {{client.pob}}
+      </div>
+      <div class="col">
+        {{client.address}}
+      </div>
+      <div class="col">
+        {{client.contactValue}}
+      </div>
+      <div class="col-3 row px-auto">
+      <div class="col-6">
+        <button class="btn-primary">Modifier</button>
+      </div>
+        <div class="col-6">
+          <button class="btn-danger">Supprimer</button>
+        </div>
+
+
+      </div>
+
+  </div>
+
+
+  </div>
+
+</div>
