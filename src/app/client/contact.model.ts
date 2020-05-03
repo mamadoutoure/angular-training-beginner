@@ -1,6 +1,6 @@
 export class ContactModel {
 
-  contactId: string;
+  contactId: number;
   contactType: string;
   contactValue: string;
 }

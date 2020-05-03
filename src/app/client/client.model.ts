@@ -8,5 +8,5 @@ export class ClientModel {
   dob: string;
   pob: string;
   address: string;
-  contact: ContactModel[];
+  contacts: ContactModel[];
 }

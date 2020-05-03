@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {ClientService} from '../client.service';
+import {ClientModel} from '../client.model';
+import {error} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-client-list',
@@ -7,19 +10,37 @@ import {Router} from '@angular/router';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+  clients: ClientModel[];
 
-  clients = [
-    {id: 1, firstName: 'Mamadou', lastName: 'Toure', dob: '1960/12/11', pob: 'Kaedi', address: '131 Britannia', contactValue: '581-777-5570'},
-    {id: 2, firstName: 'Joseph', lastName: 'Ade', dob: '1950/10/11', pob: 'Lome', address: '131 rue du Bonheur', contactValue: '819-985-5570'},
-    {id: 3, firstName: 'Fadel', lastName: 'Toure', dob: '1930/12/08', pob: 'Kaedi', address: '43 Rue des papilons Roses', contactValue: 'ftoure@gmail.com'},
-  ];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private clientService: ClientService) { }
 
 
   ngOnInit(): void {
+    this.getClientList();
   }
 
   clientDetail(id: number){
     this.router.navigate(['client', id]);
+  }
+
+  getClientList() {
+    this.clientService.getClientList().subscribe(
+      (clients) => {this.clients = clients; },
+      (error) => {console.log(error); }
+    );
+  }
+
+  removeClient(clientId: number) {
+    console.log(clientId);
+    this.clientService.removeClient(clientId);
+   // this.router.navigate(['/list']);
+    this.getClientList();
+    // this.router.navigate(['list']);
+
+    }
+
+  editClient(clientId){
+
+    this.router.navigate(['edit', clientId]);
   }
 }
