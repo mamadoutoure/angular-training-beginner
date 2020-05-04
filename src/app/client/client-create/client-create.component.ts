@@ -13,11 +13,11 @@ export class ClientCreateComponent implements OnInit {
   clientForm: FormGroup;
 
   contactCategories = [
-    {code: 'p', description: 'Cellulaire'},
-    {code: 'f', description: 'Fixe'},
-    {code: 's', description: 'Skype'},
-    {code: 'w', description: 'Whatsapp'},
-    {code: 'ft', description: 'FaceTime'}
+    {code: 'cell', description: 'Cellulaire'},
+    {code: 'fix', description: 'Fixe'},
+    {code: 'skype', description: 'Skype'},
+    {code: 'whatsapp', description: 'Whatsapp'},
+    {code: 'facetime', description: 'FaceTime'}
   ];
   constructor(private clientService: ClientService,
               private router: Router) { }

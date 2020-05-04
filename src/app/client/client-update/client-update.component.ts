@@ -14,11 +14,12 @@ export class ClientUpdateComponent implements OnInit {
   clientForm: FormGroup;
 
   contactCategories = [
-    {code: 'p', description: 'Cellulaire'},
-    {code: 'f', description: 'Fixe'},
-    {code: 's', description: 'Skype'},
-    {code: 'w', description: 'Whatsapp'},
-    {code: 'ft', description: 'FaceTime'}
+    {code: 'cell', description: 'Cellulaire'},
+    {code: 'fix', description: 'Fixe'},
+    {code: 'skype', description: 'Skype'},
+    {code: 'email', description: 'Email'},
+    {code: 'whatsapp', description: 'Whatsapp'},
+    {code: 'facetime', description: 'FaceTime'}
   ];
   constructor(private clientService: ClientService,
               private router: Router, private route: ActivatedRoute) { }
@@ -26,8 +27,20 @@ export class ClientUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
 
-    const client = this.clientService.getClientById(+this.route.snapshot.params.id);
-    this.clientForm.patchValue(client);
+    const client: ClientModel = this.clientService.getClientById(+this.route.snapshot.params.id);
+    this.clientForm.get('firstName').patchValue(client.firstName);
+    this.clientForm.get('lastName').patchValue(client.lastName);
+    this.clientForm.get('dob').patchValue(client.dob);
+    this.clientForm.get('pob').patchValue(client.pob);
+    this.clientForm.get('address').patchValue(client.address);
+    client.contacts.forEach((contact) => {
+      this.contacts.push(this.createContact(contact.contactType, contact.contactValue));
+    });
+
+  }
+
+  get contacts(): FormArray {
+    return this.clientForm.get('contacts') as FormArray;
   }
 
 
@@ -42,10 +55,10 @@ export class ClientUpdateComponent implements OnInit {
       )
     });
   }
-  createContact(){
+  createContact(type= '', value= ''){
     return new FormGroup({
-      contactType: new FormControl(''),
-      contactValue: new FormControl('')
+      contactType: new FormControl(type),
+      contactValue: new FormControl(value)
     });
   }
 
@@ -62,7 +75,7 @@ export class ClientUpdateComponent implements OnInit {
     console.log(this.clientForm.value);
     let client = new ClientModel();
     client = this.clientForm.value;
-    this.clientService.updateClient(this.clientForm.value);
+    this.clientService.updateClient(this.clientForm.value, +this.route.snapshot.params.id);
     this.router.navigate(['list']);
 
   }

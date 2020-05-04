@@ -43,7 +43,7 @@
             <label for="dob">Date de Naissance : </label>
           </div>
           <div class="col-4">
-            <input formControlName="dob"type="date" class="form-control" id="dob" placeholder="JJ/MM/AAA">
+            <input formControlName="dob"type="string" class="form-control" id="dob" placeholder="JJ/MM/AAA">
           </div>
 
           <div class="col-2">
@@ -88,9 +88,8 @@
           <ng-container [formGroupName]="i">
             <div class="col-5">
 
-              <select id="contact" class="form-control" formControlName="contactType">
-                <option value="">Choisir un type de contact..</option>
-                <option  *ngFor="let contact of contactCategories" [ngValue]="contact.code">{{contact.description}}</option>
+              <select id="contact" class="form-control" formControlName="contactType" [(ngModel)]="contact.value.contactType">
+                <option  *ngFor="let categ of contactCategories" [ngValue]="categ.code">{{categ.description}}</option>
               </select>
             </div>
 

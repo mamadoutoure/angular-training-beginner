@@ -28,7 +28,6 @@ export class ClientService {
           contactType: 'fix',
           contactValue: '613-560-9810'
         },
-        ,
         {contactId: 4,
           contactType: 'facetime',
           contactValue: 'mtoure'
@@ -56,7 +55,6 @@ export class ClientService {
           contactType: 'fix',
           contactValue: '514-560-9000'
         },
-        ,
         {contactId: 4,
           contactType: 'facetime',
           contactValue: 'joadesko'
@@ -83,7 +81,6 @@ export class ClientService {
           contactType: 'fix',
           contactValue: '581-234-6578'
         },
-        ,
         {contactId: 4,
           contactType: 'facetime',
           contactValue: 'ftoure'
@@ -116,10 +113,11 @@ export class ClientService {
     return this.clientList.filter( (client) =>   client.id === clientId)[0];
   }
 
-  updateClient(newClient: ClientModel){
-    const clientId = newClient.id;
-    const idx = this.clientList.findIndex(client => client.id === clientId);
+  updateClient(newClient: ClientModel, id: number){
+    //const clientId = newClient.id;
+    const idx = this.clientList.findIndex(client => client.id === id);
     if (idx !== -1) {
+      newClient.id = id;
       this.clientList[idx] = newClient;
     }
 }
