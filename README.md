@@ -25,3 +25,27 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Adding Bootstrap
+1 - Run npm i bootstrap@latest jquery@latest --save
+
+2 - Open angular.json and under style and scripts, add css and js related to bootstrap
+ "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
+            ],
+            "scripts": [
+                "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+             
+
+            ]
+
+## Adding Fonteawesome
+
+1 - Faire npm install font-awesome --save
+2 - Ouvrir angular.json et ajouter fonteawsome dans le tableau
+            "styles": [
+                         "node_modules/ont-awesome/css/font-awesome.css"
+                       ]
