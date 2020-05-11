@@ -43,34 +43,39 @@
         </th>
         </thead>
         <tbody>
-        <tr *ngFor="let client of clients" (click)="clientDetail(client.id)">
-          <td colspan="1">
+        <tr *ngFor="let client of clients">
+          <td colspan="1" class="clickable" (click)="clientDetail(client.id)">
             {{client.firstName}}
           </td>
-          <td colspan="1">
+          <td colspan="1" class="clickable"  (click)="clientDetail(client.id)">
             {{client.lastName}}
           </td>
           <td colspan="1">
-            {{client.dob}}
+            {{client.dob | date:'longDate': '':'fr'}}
           </td>
           <td colspan="1">
             {{client.pob}}
           </td>
           <td colspan="1">
-            {{client.address}}
+            {{client.address.streetName}}&nbsp;{{client.address.city}}&nbsp;{{client.address.district}}
           </td>
           <td colspan="1">
             {{client.contacts[0].contactValue}}
           </td>
           <td colspan="1">
             <div class="btn-group">
-              <button type="button" class="btn mr-2 btn-outline-info" (click)="editClient(client.id)"><i class="fa fa-pencil"></i>
+              <button type="button" class="btn mr-1 btn-outline-primary" (click)="displayOrder"><i class="fa fa-shopping-cart"></i>
+              </button>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn mr-1 btn-outline-info" (click)="editClient(client.id)"><i class="fa fa-pencil"></i>
               </button>
             </div>
             <div class="btn-group">
               <button type="button" class="btn btn-outline-danger" (click)="removeClient(client.id)"><i class="fa fa-trash"></i>
               </button>
             </div>
+
 
           </td>
         </tr>
@@ -82,3 +87,4 @@
 
   </div>
 </div>
+

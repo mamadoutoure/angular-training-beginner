@@ -14,21 +14,25 @@ export class ClientService {
       lastName: 'Toure',
       dob: '1960/12/11',
       pob: 'Kaedi',
-      address: '131 Britannia',
+      address: {
+        streetName: '131 Britannia',
+        city: 'Gatineau',
+        district: 'Outaouais'
+      },
       contacts: [
-        {contactId: 1,
+        {
          contactType: 'cell',
          contactValue: '581-777-5570'
         },
-        {contactId: 2,
+        {
           contactType: 'email',
           contactValue: 'mamadou_toure@yahoo.com'
         },
-        {contactId: 3,
+        {
           contactType: 'fix',
           contactValue: '613-560-9810'
         },
-        {contactId: 4,
+        {
           contactType: 'facetime',
           contactValue: 'mtoure'
         }
@@ -41,21 +45,25 @@ export class ClientService {
       lastName: 'Ade',
       dob: '1950/10/11',
       pob: 'Lome',
-      address: '131 rue du Bonheur',
+      address: {
+        streetName: '131 Rue du Bonheur',
+        city: 'Trois-Rivieres',
+        district: 'Les Marais'
+      },
       contacts: [
-        {contactId: 1,
+        {
           contactType: 'cell',
           contactValue: '819-675-5530'
         },
-        {contactId: 2,
+        {
           contactType: 'email',
           contactValue: 'joade@yahoo.com'
         },
-        {contactId: 3,
+        {
           contactType: 'fix',
           contactValue: '514-560-9000'
         },
-        {contactId: 4,
+        {
           contactType: 'facetime',
           contactValue: 'joadesko'
         }
@@ -67,21 +75,25 @@ export class ClientService {
       lastName: 'Toure',
       dob: '1930/12/08',
       pob: 'Kaedi',
-      address: '43 Rue des papilons Roses',
+      address: {
+        streetName: '56 Rue des papillons Rose',
+        city: 'Montreal',
+        district: 'Rive Sud'
+      },
       contacts: [
-        {contactId: 1,
+        {
           contactType: 'cell',
           contactValue: '819-449-5870'
         },
-        {contactId: 2,
+        {
           contactType: 'email',
           contactValue: 'ftoure@yahoo.com'
         },
-        {contactId: 3,
+        {
           contactType: 'fix',
           contactValue: '581-234-6578'
         },
-        {contactId: 4,
+        {
           contactType: 'facetime',
           contactValue: 'ftoure'
         }

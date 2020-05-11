@@ -10,6 +10,11 @@ import { ClientUpdateComponent } from './client/client-update/client-update.comp
 import { ClientDetailComponent } from './client/client-detail/client-detail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'fr');
 
 
 @NgModule({
@@ -25,9 +30,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES)
+    BsDatepickerModule.forRoot(),
+    RouterModule.forRoot(APP_ROUTES),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: BsDatepickerConfig, useFactory: getDatepickerConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getDatepickerConfig(): BsDatepickerConfig {
+  return Object.assign(new BsDatepickerConfig(), {
+    dateInputFormat: 'YYYY-MM-DD',
+    containerClass: 'theme-dark-blue',
+    isAnimated: true,
+
+  });
+}

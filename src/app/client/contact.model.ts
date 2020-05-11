@@ -1,6 +1,4 @@
-export class ContactModel {
-
-  contactId: number;
+export interface ContactModel {
   contactType: string;
   contactValue: string;
 }

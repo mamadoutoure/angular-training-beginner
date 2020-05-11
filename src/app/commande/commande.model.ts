@@ -1,11 +1,11 @@
-import {LineItemModel} from './lineIterm.model';
+import {CommandDetailsModel} from './command-details.model';
 
 
-export class CommandModel {
+export interface CommandModel {
 
-  id: number;
+  id?: number;
   clientId: string;
   date: string;
-  items: LineItemModel[];
+  commandDetails: CommandDetailsModel[];
 
 }
