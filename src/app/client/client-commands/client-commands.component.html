@@ -1,0 +1,100 @@
+<div class="mt-3">
+
+
+  <div class="card ">
+
+    <!--  - card header -->
+    <div class="card-header bg-light">
+      <h3 class="card-title text-dark">Liste des commandes du client {{clientCommandsDto.clientCode}} </h3>
+
+    </div>
+
+    <!--  - card body -->
+    <div class="card-body">
+
+      <div class="form-group row">
+
+        <div class="col-md-2">
+          <label >client:</label>
+        </div>
+        <div class="col-md-3">
+          <h4>{{clientCommandsDto.clientName}}</h4>
+
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <hr>
+      </div>
+
+
+
+
+      <div class="card">
+
+        <div class="card-header bg-light">
+          <div class="row">
+            <div class="col-11">
+              <h3 class="card-title text-dark">Les commandes</h3>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card-body">
+          <table class="table table-borderless table-striped">
+
+
+            <thead class="thead-dark">
+            <th class="text-white-50">
+              # commande
+            </th>
+            <th class="text-white-50">
+              Date de commande
+            </th>
+            <th class="text-white-50">
+              <span class="float-right">Montant Total</span>
+            </th>
+
+            </thead>
+            <tbody>
+
+            <tr class="clicable" *ngFor="let command of clientCommandsDto.commands" (click)="displayDetailCommand(command.commandCode)">
+              <td>
+                {{command.commandCode}}
+              </td>
+              <td>
+                {{command.commandDate | date:'longDate': '':'fr'}}
+              </td>
+              <td class="float-right">
+                {{totalCommandAmount(command.commandDetails) | currency }}
+              </td>
+
+
+            </tr>
+            </tbody>
+
+
+          </table>
+        </div>
+
+        <div class="card-footer bg-light">
+          <div class="float-left">
+            <h4>Total de(s) {{clientCommandsDto.commands.length}} commande(s):   </h4>
+          </div>
+          <div class="float-right">
+            <h4>{{totalCommands(clientCommandsDto.commands) | currency:'CAD'}} </h4>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
