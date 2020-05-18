@@ -4,12 +4,12 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
 export class ClientBaseForm{
   clientForm: FormGroup;
   contactCategories = [
-    {code: 'cell', description: 'Cellulaire'},
-    {code: 'fix', description: 'Fixe'},
-    {code: 'skype', description: 'Skype'},
-    {code: 'email', description: 'Email'},
-    {code: 'whatsapp', description: 'Whatsapp'},
-    {code: 'facetime', description: 'FaceTime'}
+    {code: 'CEL', description: 'Cellulaire'},
+    {code: 'FIX', description: 'Fixe'},
+    {code: 'SKY', description: 'Skype'},
+    {code: 'EMA', description: 'Email'},
+    {code: 'WHA', description: 'Whatsapp'},
+    {code: 'FAC', description: 'FaceTime'}
   ];
   constructor(){
 
@@ -23,9 +23,9 @@ export class ClientBaseForm{
       dob: new FormControl(''),
       pob: new FormControl(''),
       address: new FormGroup({
-        streetName: new FormControl(''),
-        city: new FormControl(''),
-        district: new FormControl('')
+        rue: new FormControl(''),
+        ville: new FormControl(''),
+        quartier: new FormControl('')
       }),
       contacts: new FormArray([this.createContact()]
       )
@@ -36,6 +36,29 @@ export class ClientBaseForm{
       contactType: new FormControl(type),
       contactValue: new FormControl(value)
     });
+  }
+
+  get firstName(){
+    return this.clientForm.get('firstName');
+  }
+
+  get lastName(){
+    return this.clientForm.get('lastName');
+  }
+
+  get dob(){
+    return this.clientForm.get('dob');
+   }
+
+   get pob(){
+     return this.clientForm.get('pob');
+   }
+  get address(){
+    return this.clientForm.get('address');
+  }
+
+  get contacts(): FormArray {
+    return this.clientForm.get('contacts') as FormArray;
   }
 
   onAddContactEntry() {

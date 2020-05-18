@@ -3,9 +3,9 @@ import {CommandDetailsModel} from './command-details.model';
 
 export interface CommandModel {
 
-  id?: number;
-  clientId: string;
-  date: string;
+  code: string;
+  clientCode: string;
+  commandDate: string;
   commandDetails: CommandDetailsModel[];
 
 }

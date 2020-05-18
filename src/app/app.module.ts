@@ -14,6 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { CommandeListComponent } from './commande/commande-list/commande-list.component';
+import { CommandeCreateComponent } from './commande/commande-create/commande-create.component';
+import { CommandeUpdateComponent } from './commande/commande-update/commande-update.component';
+import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
+import { ClientCommandsComponent } from './client/client-commands/client-commands.component';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -24,6 +29,11 @@ registerLocaleData(localeFr, 'fr');
     ClientCreateComponent,
     ClientUpdateComponent,
     ClientDetailComponent,
+    CommandeListComponent,
+    CommandeCreateComponent,
+    CommandeUpdateComponent,
+    CommandeDetailComponent,
+    ClientCommandsComponent,
   ],
   imports: [
     BrowserModule,

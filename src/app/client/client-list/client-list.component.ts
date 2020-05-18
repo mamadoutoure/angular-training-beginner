@@ -19,13 +19,13 @@ export class ClientListComponent implements OnInit {
     this.getClientList();
   }
 
-  clientDetail(id: number){
-    this.router.navigate(['client', id]);
+  clientDetail(code: string){
+    this.router.navigate(['/client-detail', code]);
   }
 
   getClientList() {
     this.clientService.getClientList().subscribe(
-      (clients) => {this.clients = clients; },
+      (retour) => {this.clients = retour; },
       (error) => {console.log(error); }
     );
   }
@@ -39,11 +39,11 @@ export class ClientListComponent implements OnInit {
 
     }
 
-  editClient(clientId){
+  editClient(code){
 
-    this.router.navigate(['edit', clientId]);
+    this.router.navigate(['/client-edit', code]);
   }
-  displayOrder() {
-    this.router.navigate(['/list']);
+  displayOrder(code) {
+    this.router.navigate(['/client-commands', code]);
   }
 }

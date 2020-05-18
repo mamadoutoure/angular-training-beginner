@@ -2,7 +2,7 @@
 
 export interface CommandDetailsModel {
 
-  productId: string;
+  productCode: string;
   quantity: number;
 
 }

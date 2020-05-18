@@ -1,6 +1,6 @@
 export interface AddressModel {
 
-  streetName: string;
-  city: string;
-  district: string;
+  rue: string;
+  ville: string;
+  quartier: string;
 }

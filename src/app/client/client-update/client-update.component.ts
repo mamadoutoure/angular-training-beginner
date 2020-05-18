@@ -12,7 +12,30 @@ import {ClientBaseForm} from '../client-base-form';
 })
 export class ClientUpdateComponent extends ClientBaseForm  implements OnInit {
 
-
+client = {
+  clientCode: 'CL-002',
+  firstName: 'Mamadou',
+  lastName: 'Toure',
+  dob: '2020-05-14',
+  pob: 'Kaedi',
+  address: {
+    rue: 'Armand-Viau',
+    ville: 'Quebec',
+    quartier: 'Val-Belair'
+  },
+  contacts: [
+    {
+      contactCode: 'CEL',
+      name: 'Cellulaire',
+      contactValue: '583-874-9898'
+    },
+    {
+      contactCode: 'EMA',
+      name: 'Email',
+      contactValue: 'mamadou.toure@yahoo.com'
+    }
+  ]
+};
 
 
   constructor(private clientService: ClientService,
@@ -23,21 +46,19 @@ export class ClientUpdateComponent extends ClientBaseForm  implements OnInit {
   ngOnInit(): void {
     this.createForm();
 
-    const client: ClientModel = this.clientService.getClientById(+this.route.snapshot.params.id);
-    this.clientForm.get('firstName').patchValue(client.firstName);
-    this.clientForm.get('lastName').patchValue(client.lastName);
-    this.clientForm.get('dob').patchValue(client.dob);
-    this.clientForm.get('pob').patchValue(client.pob);
-    this.clientForm.get('address').patchValue(client.address);
-    client.contacts.forEach((contact) => {
-      this.contacts.push(this.createContact(contact.contactType, contact.contactValue));
+    //const client: ClientModel = this.clientService.getClientById(+this.route.snapshot.params.id);
+    this.firstName.patchValue(this.client.firstName);
+    this.lastName.patchValue(this.client.lastName);
+    this.dob.patchValue(this.client.dob);
+    this.pob.patchValue(this.client.pob);
+    this.address.patchValue(this.client.address);
+    this.client.contacts.forEach((contact) => {
+      this.contacts.push(this.createContact(contact.contactCode, contact.contactValue));
     });
 
   }
 
-  get contacts(): FormArray {
-    return this.clientForm.get('contacts') as FormArray;
-  }
+
 
 
 
