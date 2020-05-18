@@ -1,5 +1,5 @@
 import {OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationDialogService} from '../shared/confirmation-dialog.service';
 
 export class ClientBaseForm{
@@ -17,14 +17,14 @@ export class ClientBaseForm{
 
   createForm(){
     this.clientForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      dob: new FormControl(''),
-      pob: new FormControl(''),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      pob: new FormControl('', Validators.required),
       address: new FormGroup({
-        rue: new FormControl(''),
-        ville: new FormControl(''),
-        quartier: new FormControl('')
+        rue: new FormControl('', Validators.required),
+        ville: new FormControl('', Validators.required),
+        quartier: new FormControl('', Validators.required)
       }),
       contacts: new FormArray([this.createContact()]
       )
@@ -32,8 +32,8 @@ export class ClientBaseForm{
   }
   createContact(type= '', value= ''){
     return new FormGroup({
-      contactType: new FormControl(type),
-      contactValue: new FormControl(value)
+      contactType: new FormControl(type, Validators.required),
+      contactValue: new FormControl(value, Validators.required)
     });
   }
 
@@ -65,6 +65,26 @@ export class ClientBaseForm{
   }
 
 
+  get quartier() {
+    return this.address.get('quartier');
+  }
+
+  get rue() {
+    return this.address.get('rue');
+  }
+
+  get ville() {
+    return this.address.get('ville');
+  }
+
+  get contactType() {
+    return this.contacts.get('contactType');
+  }
+
+  get contactValue() {
+    return this.contacts.get('contactValue');
+  }
+
   onRemoveEntry(message: string, i: number) {
 
     this.confirmationDialogService.openConfirmDialog(
@@ -75,6 +95,11 @@ export class ClientBaseForm{
         this.contacts.removeAt(i);
       }
     });
+  }
+
+
+  setError(control: AbstractControl){
+    return {'is-invalid': control.invalid && control.dirty};
   }
 
 }
