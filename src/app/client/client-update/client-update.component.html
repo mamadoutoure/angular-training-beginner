@@ -22,7 +22,7 @@
           </div>
 
           <div class="col-4">
-            <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="">
+            <input formControlName="firstName" type="text" [ngClass]="setError(firstName)"  class="form-control" id="firstName" placeholder="">
           </div>
 
           <div class="col-2">
@@ -31,7 +31,7 @@
 
           <div class="col-4">
 
-            <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="">
+            <input formControlName="lastName" [ngClass]="setError(lastName)"  type="text" class="form-control" id="lastName" placeholder="">
           </div>
 
 
@@ -43,14 +43,14 @@
             <label for="dob">Date de Naissance : </label>
           </div>
           <div class="col-4">
-            <input formControlName="dob"type="string" class="form-control" id="dob" placeholder="JJ/MM/AAA">
+            <input formControlName="dob"type="text" [ngClass]="setError(dob)"  class="form-control" id="dob" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" bsDatepicker >
           </div>
 
           <div class="col-2">
             <label for="pob">Lieu de Naissance : </label>
           </div>
           <div class="col-4">
-            <input formControlName="pob" type="text" class="form-control" id="pob" placeholder="">
+            <input formControlName="pob" type="text" [ngClass]="setError(pob)" class="form-control" id="pob" placeholder="">
           </div>
 
 
@@ -61,8 +61,8 @@
             <label for="rue">Rue:</label>
           </div>
 
-          <div class="col-3">
-            <input formControlName="rue" type="text" class="form-control" id="rue" placeholder="">
+          <div class="col-3 ">
+            <input formControlName="rue" type="text" [ngClass]="setError(rue)" class="form-control" id="rue" placeholder="">
           </div>
 
           <div class="col-1">
@@ -70,7 +70,7 @@
           </div>
 
           <div class="col-3">
-            <input formControlName="quartier" type="text" class="form-control" id="quartier" placeholder="">
+            <input formControlName="quartier" [ngClass]="setError(quartier)" type="text" class="form-control"  id="quartier" placeholder="">
           </div>
 
           <div class="col-1">
@@ -78,7 +78,7 @@
           </div>
 
           <div class="col-3">
-            <input formControlName="ville" type="text" class="form-control" id="ville" placeholder="">
+            <input formControlName="ville" [ngClass]="setError(ville)" type="text" class="form-control" id="ville" placeholder="">
           </div>
         </div>
 
@@ -102,13 +102,14 @@
           <ng-container [formGroupName]="i">
             <div class="col-5">
 
-              <select id="contact" class="form-control" formControlName="contactType" [(ngModel)]="contact.value.contactType">
-                <option  *ngFor="let categ of contactCategories" [ngValue]="categ.code">{{categ.description}}</option>
+              <select id="contact" class="form-control" [ngClass]="setError(contacts.at(i).get('contactType'))" formControlName="contactType">
+                <option value="">Choisir un type de contact..</option>
+                <option  *ngFor="let contact of contactCategories" [ngValue]="contact.code">{{contact.description}}</option>
               </select>
             </div>
 
             <div class="col-5">
-              <input type="text" class="form-control" formControlName="contactValue" id="value" placeholder="">
+              <input type="text" class="form-control" [ngClass]="setError(contacts.at(i).get('contactValue'))"  formControlName="contactValue" id="value" placeholder="">
             </div>
 
             <div class="col-2">
@@ -126,7 +127,7 @@
 
       <!--  - card footer -->
       <div class="card-footer">
-        <button type="submit" class="btn btn-outline-success"><i class="fa fa-save">&nbsp;</i>Sauvegarder</button>
+        <button type="submit" class="btn btn-outline-success" [disabled]="clientForm.invalid"><i class="fa fa-save">&nbsp;</i>Sauvegarder</button>
       </div>
 
 
@@ -134,5 +135,6 @@
 
 
   </form>
+
 
 </div>
