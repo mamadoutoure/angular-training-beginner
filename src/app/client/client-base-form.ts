@@ -99,7 +99,7 @@ export class ClientBaseForm{
 
 
   setError(control: AbstractControl){
-    return {'is-invalid': control.invalid && control.dirty};
+    return {'is-invalid': control.invalid && this.clientForm.touched};
   }
 
 }

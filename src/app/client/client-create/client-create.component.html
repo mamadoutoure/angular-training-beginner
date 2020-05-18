@@ -127,7 +127,7 @@
 
     <!--  - card footer -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-outline-success" [disabled]="clientForm.invalid"><i class="fa fa-save">&nbsp;</i>Sauvegarder</button>
+      <button type="submit" [ngClass]="{'disabled': clientForm.invalid }" class="btn btn-outline-success" [disabled]="clientForm.invalid"><i class="fa fa-save">&nbsp;</i>Sauvegarder</button>
     </div>
 
 
