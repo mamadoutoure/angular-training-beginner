@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ClientService} from '../client.service';
 import {ClientModel} from '../client.model';
 import {ClientBaseForm} from '../client-base-form';
+import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
 
 @Component({
   selector: 'app-client-update',
@@ -39,8 +40,9 @@ client = {
 
 
   constructor(private clientService: ClientService,
-              private router: Router, private route: ActivatedRoute) {
-    super();
+              private router: Router, private route: ActivatedRoute,
+              private confDialog: ConfirmationDialogService) {
+    super(confDialog);
   }
 
   ngOnInit(): void {
@@ -59,7 +61,10 @@ client = {
   }
 
 
-
+  onRemoveContactEntry(i){
+    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactType;
+    this.onRemoveEntry(message, i);
+  }
 
 
   submitForm() {
@@ -67,7 +72,7 @@ client = {
     let client: ClientModel;
     client = this.clientForm.value;
     this.clientService.updateClient(this.clientForm.value, +this.route.snapshot.params.id);
-    this.router.navigate(['list']);
+    this.router.navigate(['/client-list']);
 
   }
 

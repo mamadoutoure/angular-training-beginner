@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
 
 @Component({
   selector: 'app-commande-list',
@@ -53,7 +54,7 @@ export class CommandeListComponent implements OnInit {
         ]
     }
     ];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
   }
@@ -73,6 +74,21 @@ export class CommandeListComponent implements OnInit {
 
   displayCommand(code){
     this.router.navigate(['/commande-detail', code]);
+  }
+
+  removeCommand(code: string){
+    this.confirmationDialogService.openConfirmDialog(
+      'Voulez-vous vraiment supprimer ce cette commande ? ' + code)
+      .afterClosed().subscribe(response => {
+      console.log(response);
+      if (response) {
+        // appeler la suppression
+      } else {
+        // ne rien faire
+      }
+      // this.clientService.removeClient(clientId);
+
+    });
   }
 
 }

@@ -1,5 +1,6 @@
 import {OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {ConfirmationDialogService} from '../shared/confirmation-dialog.service';
 
 export class CommandeBaseForm{
   commandForm: FormGroup;
@@ -31,9 +32,8 @@ export class CommandeBaseForm{
       productPrice: 3.99
     }
   ];
-  constructor(){
 
-  }
+  constructor(private confirmationDialogService: ConfirmationDialogService){}
 
 
   createForm(){
@@ -79,8 +79,16 @@ export class CommandeBaseForm{
     this.commandDetails.push(this.createCommandDetails());
   }
 
-  onRemoveCommandDetailEntry(i: number) {
-    this.commandDetails.removeAt(i);
+  onRemoveEntry(message: string, i: number) {
+
+    this.confirmationDialogService.openConfirmDialog(
+      message)
+      .afterClosed().subscribe(response => {
+      console.log(response);
+      if (response) {
+        this.commandDetails.removeAt(i);
+      }
+    });
   }
 
 

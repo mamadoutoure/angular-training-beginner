@@ -47,5 +47,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1 - Faire npm install font-awesome --save
 2 - Ouvrir angular.json et ajouter fonteawsome dans le tableau
             "styles": [
-                         "node_modules/ont-awesome/css/font-awesome.css"
+                         `"node_modules/font-awesome/css/font-awesome.css"`
                        ]
+
+
+## Adding Bootstrap ngx
+ng add ngx-bootstrap

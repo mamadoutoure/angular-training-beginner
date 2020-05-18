@@ -1,0 +1,13 @@
+<div class="card">
+
+  <div class="card-header">
+    <h4 class="text-black-50">Confirmation</h4>
+  </div>
+  <div class="card-body text-dark ">
+    {{ data ? data.message : 'kjjkjkj'}}
+  </div>
+  <div class="card-footer">
+  <button class="btn btn-info" id="no-button" [mat-dialog-close]="false" >Non</button>
+  <button class="btn btn-danger float-right" id="yes-button" [mat-dialog-close]="true">Oui</button>
+  </div>
+</div>

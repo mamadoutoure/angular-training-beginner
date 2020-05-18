@@ -19,6 +19,7 @@ import { CommandeCreateComponent } from './commande/commande-create/commande-cre
 import { CommandeUpdateComponent } from './commande/commande-update/commande-update.component';
 import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
 import { ClientCommandsComponent } from './client/client-commands/client-commands.component';
+import {SharedModule} from './shared/shared.module';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -42,6 +43,7 @@ registerLocaleData(localeFr, 'fr');
     FormsModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
+    SharedModule,
     BrowserAnimationsModule
   ],
   providers: [{ provide: BsDatepickerConfig, useFactory: getDatepickerConfig }],

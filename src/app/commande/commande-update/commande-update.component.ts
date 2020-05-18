@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandeBaseForm} from '../commande-base-form';
 import {CommandModel} from '../commande.model';
+import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
 
 @Component({
   selector: 'app-commande-update',
@@ -24,8 +25,8 @@ export class CommandeUpdateComponent  extends CommandeBaseForm implements OnInit
       }
     ]
   };
-  constructor() {
-    super();
+  constructor(private confDialog: ConfirmationDialogService) {
+    super(confDialog);
   }
 
   ngOnInit(): void {
@@ -43,5 +44,10 @@ export class CommandeUpdateComponent  extends CommandeBaseForm implements OnInit
 
   submitForm(){
 
+  }
+
+  onRemoveCommandDetailEntry(i: number) {
+    const message = 'Voulez-vous vraiment supprimer ? ' + this.commandDetails.at(i).value.productCode;
+    this.onRemoveEntry(message, i);
   }
 }

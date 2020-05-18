@@ -11,7 +11,7 @@ import {ClientCommandsComponent} from './client/client-commands/client-commands.
 
 
 export const APP_ROUTES: Routes = [
-  {path: '', redirectTo: 'list', pathMatch: 'full'},
+  {path: '', redirectTo: 'client-list', pathMatch: 'full'},
   {
     path: 'client-list', component: ClientListComponent
   },

@@ -4,6 +4,7 @@ import {ClientModel} from '../client.model';
 import {ClientService} from '../client.service';
 import {Router} from '@angular/router';
 import {ClientBaseForm} from '../client-base-form';
+import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
 
 @Component({
   selector: 'app-client-create',
@@ -12,9 +13,11 @@ import {ClientBaseForm} from '../client-base-form';
 })
 export class ClientCreateComponent extends ClientBaseForm  implements OnInit {
   constructor(private clientService: ClientService,
-              private router: Router) {
-    super();
+              private router: Router,
+              private confDialog: ConfirmationDialogService) {
+    super(confDialog);
   }
+
 
   ngOnInit(): void {
     this.createForm();
@@ -26,15 +29,14 @@ export class ClientCreateComponent extends ClientBaseForm  implements OnInit {
     let client: ClientModel;
     client = this.clientForm.value;
     this.clientService.createClient(this.clientForm.value);
-    this.router.navigate(['list']);
+    this.router.navigate(['/client-list']);
 
   }
 
-  createContact(){
-    return new FormGroup({
-      contactType: new FormControl(''),
-      contactValue: new FormControl('')
-    });
+
+  onRemoveContactEntry(i){
+    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactType;
+    this.onRemoveEntry(message, i);
   }
 
 

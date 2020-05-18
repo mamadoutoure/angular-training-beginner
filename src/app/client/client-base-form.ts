@@ -1,5 +1,6 @@
 import {OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {ConfirmationDialogService} from '../shared/confirmation-dialog.service';
 
 export class ClientBaseForm{
   clientForm: FormGroup;
@@ -11,9 +12,7 @@ export class ClientBaseForm{
     {code: 'WHA', description: 'Whatsapp'},
     {code: 'FAC', description: 'FaceTime'}
   ];
-  constructor(){
-
-  }
+  constructor(private confirmationDialogService: ConfirmationDialogService){}
 
 
   createForm(){
@@ -65,9 +64,17 @@ export class ClientBaseForm{
     (this.clientForm.get('contacts') as FormArray).push(this.createContact());
   }
 
-  onRemoveContactEntry(i: number) {
-    const curContactControl  = this.clientForm.get('contacts') as FormArray;
-    curContactControl.removeAt(i);
+
+  onRemoveEntry(message: string, i: number) {
+
+    this.confirmationDialogService.openConfirmDialog(
+      message)
+      .afterClosed().subscribe(response => {
+      console.log(response);
+      if (response) {
+        this.contacts.removeAt(i);
+      }
+    });
   }
 
 }

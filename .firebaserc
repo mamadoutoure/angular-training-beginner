@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "training-6ccb3": {
+      "hosting": {
+        "training": [
+          "training-6ccb3"
+        ]
+      }
+    }
+  }
+}
