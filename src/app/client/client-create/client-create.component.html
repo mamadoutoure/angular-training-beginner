@@ -102,9 +102,9 @@
           <ng-container [formGroupName]="i">
           <div class="col-5">
 
-            <select id="contact" class="form-control" [ngClass]="setError(contacts.at(i).get('contactType'))" formControlName="contactType">
+            <select id="contact" class="form-control" [ngClass]="setError(contacts.at(i).get('contactCode'))" formControlName="contactCode">
               <option value="">Choisir un type de contact..</option>
-              <option  *ngFor="let contact of contactCategories" [ngValue]="contact.code">{{contact.description}}</option>
+              <option  *ngFor="let contact of contactCategories" [ngValue]="contact.contactCode">{{contact.description}}</option>
             </select>
           </div>
 

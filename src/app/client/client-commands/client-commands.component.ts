@@ -10,7 +10,7 @@ export class ClientCommandsComponent implements OnInit {
 
 
   clientCommandsDto  = {
-    clientCode: 'CLI-009',
+    customerCode: 'CLI-009',
     clientName: 'Mamadou Toure',
     commands: [
       {

@@ -45,13 +45,13 @@
             {{commande.commandCode}}
           </td>
           <td colspan="1" class="clickable">
-            {{commande.client.firstName}}&nbsp;{{commande.client.lastName}}
+            {{commande.customerName}}
           </td>
           <td colspan="1">
             {{commande.commandDate | date:'longDate': '':'fr'}}
           </td>
           <td colspan="1">
-            {{totalCommandAmount(commande.commandLineItems) | currency:'CAD'}}
+            {{totalCommandAmount(commande.commandLinesItems) | currency:'CAD'}}
           </td>
 
           <td colspan="1">

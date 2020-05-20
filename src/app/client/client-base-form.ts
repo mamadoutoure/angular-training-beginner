@@ -5,18 +5,19 @@ import {ConfirmationDialogService} from '../shared/confirmation-dialog.service';
 export class ClientBaseForm{
   clientForm: FormGroup;
   contactCategories = [
-    {code: 'CEL', description: 'Cellulaire'},
-    {code: 'FIX', description: 'Fixe'},
-    {code: 'SKY', description: 'Skype'},
-    {code: 'EMA', description: 'Email'},
-    {code: 'WHA', description: 'Whatsapp'},
-    {code: 'FAC', description: 'FaceTime'}
+    {contactCode: 'CEL', description: 'Cellulaire'},
+    {contactCode: 'TEL', description: 'Fixe'},
+    {contactCode: 'SKY', description: 'Skype'},
+    {contactCode: 'EMA', description: 'Email'},
+    {contactCode: 'WHA', description: 'Whatsapp'},
+    {contactCode: 'FAC', description: 'FaceTime'}
   ];
   constructor(private confirmationDialogService: ConfirmationDialogService){}
 
 
   createForm(){
     this.clientForm = new FormGroup({
+      customerCode: new FormControl(''),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       dob: new FormControl('', Validators.required),
@@ -32,7 +33,7 @@ export class ClientBaseForm{
   }
   createContact(type= '', value= ''){
     return new FormGroup({
-      contactType: new FormControl(type, Validators.required),
+      contactCode: new FormControl(type, Validators.required),
       contactValue: new FormControl(value, Validators.required)
     });
   }
@@ -69,6 +70,10 @@ export class ClientBaseForm{
     return this.address.get('quartier');
   }
 
+
+  get customerCode(){
+    return this.clientForm.get('customerCode');
+  }
   get rue() {
     return this.address.get('rue');
   }
@@ -77,8 +82,8 @@ export class ClientBaseForm{
     return this.address.get('ville');
   }
 
-  get contactType() {
-    return this.contacts.get('contactType');
+  get contactCode() {
+    return this.contacts.get('contactCode');
   }
 
   get contactValue() {

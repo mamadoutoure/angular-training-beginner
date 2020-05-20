@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CommandModel} from '../commande.model';
+import {CommandDtoModel} from '../commandeDto.model';
+import {ActivatedRoute} from '@angular/router';
+import {CommandService} from '../command.service';
 
 @Component({
   selector: 'app-commande-detail',
@@ -8,34 +11,32 @@ import {CommandModel} from '../commande.model';
 })
 export class CommandeDetailComponent implements OnInit {
 
-  constructor() { }
-
-  commandeDto  = {
-    commandCode: '2344',
-    clientName: 'Mamadou Toure',
-    commandDate: '2020-05-19',
-    commandDetails: [
-      {
-        productName: 'Orange',
-        productPrice: 6.5,
-        quantity: 12
-      },
-      {
-        productName: 'Banane',
-        productPrice: 3.45,
-        quantity: 11
-      }
-    ]
-  };
+  constructor(private activatedRoute: ActivatedRoute, private commandService: CommandService) { }
+  comCode: string;
+  commandeDto: CommandDtoModel;
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe( parm => {
+      this.comCode = parm.id;
+      this.getCommandDetail(this.comCode);
+    });
   }
 
   totalCommandAmount(commadeLineItems: Array<any>): string {
 
-    const total =  commadeLineItems.reduce((accumulator, currentValue) =>
-      (accumulator.productPrice * accumulator.quantity) + (currentValue.productPrice * currentValue.quantity));
-    return total;
+    const total =  commadeLineItems.map(v => v.price * v.quantity).reduce((accumulator, currentValue) =>
+      accumulator + currentValue);
+    return total.toString();
+  }
+
+
+  getCommandDetail(commandCode: string){
+    this.commandService.getCommandByCode(commandCode).subscribe(
+      (commandDetail) => {
+        this.commandeDto = commandDetail;
+      },
+      (error) => console.log(error)
+    );
   }
 
 }

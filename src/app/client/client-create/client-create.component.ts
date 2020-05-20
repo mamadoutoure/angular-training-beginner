@@ -28,14 +28,17 @@ export class ClientCreateComponent extends ClientBaseForm  implements OnInit {
     console.log(this.clientForm.value);
     let client: ClientModel;
     client = this.clientForm.value;
-    this.clientService.createClient(this.clientForm.value);
-    this.router.navigate(['/client-list']);
+    client.customerCode = 'CLI-' + Date.now();
+    this.clientService.createClient(client).subscribe(
+      (resultat) => this.router.navigate(['/client-list']),
+        (error) => console.log(error)
+    );
 
   }
 
 
   onRemoveContactEntry(i){
-    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactType;
+    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactCode;
     this.onRemoveEntry(message, i);
   }
 

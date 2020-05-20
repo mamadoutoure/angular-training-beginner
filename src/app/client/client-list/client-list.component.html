@@ -44,10 +44,10 @@
         </thead>
         <tbody>
         <tr *ngFor="let client of clients">
-          <td colspan="1" class="clickable" (click)="clientDetail(client.code)">
+          <td colspan="1" class="clickable" (click)="clientDetail(client.customerCode)">
             {{client.firstName}}
           </td>
-          <td colspan="1" class="clickable"  (click)="clientDetail(client.code)">
+          <td colspan="1" class="clickable"  (click)="clientDetail(client.customerCode)">
             {{client.lastName}}
           </td>
           <td colspan="1">
@@ -64,15 +64,15 @@
           </td>
           <td colspan="1">
             <div class="btn-group">
-              <button type="button" class="btn mr-1 btn-outline-primary" (click)="displayOrder(client.code)"><i class="fa fa-shopping-cart"></i>
+              <button type="button" class="btn mr-1 btn-outline-primary" (click)="displayOrder(client.customerCode)"><i class="fa fa-shopping-cart"></i>
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn mr-1 btn-outline-info" (click)="editClient(client.code)"><i class="fa fa-pencil"></i>
+              <button type="button" class="btn mr-1 btn-outline-info" (click)="editClient(client.customerCode)"><i class="fa fa-pencil"></i>
               </button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-danger" (click)="removeClient(client.code)"><i class="fa fa-trash"></i>
+              <button type="button" class="btn btn-outline-danger" (click)="removeClient(client.customerCode)"><i class="fa fa-trash"></i>
               </button>
             </div>
 

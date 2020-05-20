@@ -3,8 +3,7 @@ import {AddressModel} from '../address/address.model';
 
 export interface ClientModel {
 
-  id?: number;
-  code?: string;
+  customerCode: string;
   firstName: string;
   lastName: string;
   dob: string;

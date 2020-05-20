@@ -27,7 +27,7 @@
           </div>
 
           <div class="col-md-3">
-           {{commandeDto.clientName}}
+           {{commandeDto.customerName}}
           </div>
 
 
@@ -74,18 +74,18 @@
                 </thead>
                 <tbody>
 
-                <tr *ngFor="let item of commandeDto.commandDetails">
+                <tr *ngFor="let item of commandeDto.commandLinesItems">
                   <td>
                     {{item.productName}}
                   </td>
                   <td>
-                    {{item.productPrice }}
+                    {{item.price }}
                   </td>
                   <td>
                     {{item.quantity}}
                   </td>
                   <td class="float-right">
-                    {{item.productPrice *  item.quantity | currency }}
+                    {{item.price *  item.quantity | currency }}
                   </td>
 
 
@@ -101,7 +101,7 @@
                  <h4>Total commande:   </h4>
                </div>
               <div class="float-right">
-                <h4>{{totalCommandAmount(commandeDto.commandDetails) | currency:'CAD'}} </h4>
+                <h4>{{totalCommandAmount(commandeDto.commandLinesItems) | currency:'CAD'}} </h4>
               </div>
             </div>
 

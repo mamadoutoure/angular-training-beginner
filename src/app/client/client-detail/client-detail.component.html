@@ -5,7 +5,7 @@
 
     <!--  - card header -->
     <div class="card-header bg-light">
-      <h3 class="card-title text-dark">Détail du client # {{clientDetailDto.clientCode}} </h3>
+      <h3 class="card-title text-dark">Détail du client # {{clientDetailDto?.customerCode}} </h3>
 
     </div>
 
@@ -18,7 +18,7 @@
           <label >Nom du client:</label>
         </div>
         <div class="col-md-3">
-          <h6>{{clientDetailDto.firstName}}</h6>
+          <h6>{{clientDetailDto?.firstName}}</h6>
 
         </div>
 
@@ -26,7 +26,7 @@
           <label >Prénom du client:</label>
         </div>
         <div class="col-md-3">
-          <h6>{{clientDetailDto.lastName}}</h6>
+          <h6>{{clientDetailDto?.lastName}}</h6>
 
         </div>
       </div>
@@ -36,7 +36,7 @@
           <label>Date de naissance:</label>
         </div>
         <div class="col-md-3">
-          <h6>{{clientDetailDto.dob}}</h6>
+          <h6>{{clientDetailDto?.dob}}</h6>
 
         </div>
 
@@ -44,7 +44,7 @@
           <label >Lieu de naissance:</label>
         </div>
         <div class="col-md-3">
-          <h6>{{clientDetailDto.pob}}</h6>
+          <h6>{{clientDetailDto?.pob}}</h6>
 
         </div>
       </div>
@@ -54,7 +54,7 @@
           <label>Adresse</label>
         </div>
         <div class="col-md-10">
-          <h6>{{clientDetailDto.address.rue}} , {{clientDetailDto.address.quartier}} ,  {{clientDetailDto.address.ville }}</h6>
+          <h6>{{clientDetailDto?.address.rue}} , {{clientDetailDto?.address.quartier}} ,  {{clientDetailDto?.address.ville }}</h6>
 
         </div>
 
@@ -88,9 +88,9 @@
             </thead>
             <tbody>
 
-            <tr class="clicable" *ngFor="let contact of clientDetailDto.contacts">
+            <tr class="clicable" *ngFor="let contact of clientDetailDto?.contacts">
               <td>
-                {{contact.name}}
+                {{contact?.contactName}}
               </td>
               <td>
                 {{contact.contactValue}}

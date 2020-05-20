@@ -23,8 +23,8 @@ export class ClientListComponent implements OnInit {
     this.getClientList();
   }
 
-  clientDetail(code: string) {
-    this.router.navigate(['/client-detail', code]);
+  clientDetail(customerCode: string) {
+    this.router.navigate(['client-detail', customerCode]);
   }
 
   getClientList() {
@@ -38,11 +38,11 @@ export class ClientListComponent implements OnInit {
     );
   }
 
-  removeClient(clientCode: string) {
-    console.log(clientCode);
+  removeClient(customerCode: string) {
+    console.log(customerCode);
 
     this.confirmationDialogService.openConfirmDialog(
-      'Voulez-vous vraiment supprimer ce client ? ' + clientCode)
+      'Voulez-vous vraiment supprimer ce client ? ' + customerCode)
       .afterClosed().subscribe(response => {
         console.log(response);
         if (response) {

@@ -29,7 +29,7 @@
           </div>
 
           <div class="col-md-3">
-            <select class="form-control" formControlName="clientCode">
+            <select class="form-control" formControlName="customerCode">
               <option value="1">Mamadou Toure</option>
               <option value="2">Joseph Ade</option>
               <option value="3">Fadel Toure</option>
@@ -60,7 +60,7 @@
 
 
         <div class="form-group row" formArrayName="commandDetails"
-             *ngFor="let item of commandDetails.controls; let i = index;">
+             *ngFor="let item of commandLinesItems.controls; let i = index;">
 
           <ng-container [formGroupName]="i">
             <div class="col-4">

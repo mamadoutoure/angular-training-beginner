@@ -10,16 +10,20 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ClientService {
   apiUrl = environment.apiUrl;
-  getEndpoint = 'clients';
+  clientEndpoint = 'customers/';
+  clientCreateEndpoint = 'save/customer/';
+  clientUpdateEndpoint = 'update/customer/';
+
+
   constructor(private http: HttpClient) { }
 
   getClientList(): Observable<ClientModel[]> {
-    return this.http.get<ClientModel[]>(this.apiUrl + this.getEndpoint);
+    return this.http.get<ClientModel[]>(this.apiUrl + this.clientEndpoint);
 
   }
 
   createClient(client: ClientModel){
-
+    return this.http.post<ClientModel[]>(this.apiUrl + this.clientCreateEndpoint, client);
 
   }
 
@@ -27,11 +31,12 @@ export class ClientService {
 
   }
 
-  getClientById(clientId): ClientModel{
-    return null;
+  getClientByCode(customerCode: string): Observable<ClientModel>{
+    return this.http.get<ClientModel>(this.apiUrl + this.clientEndpoint + customerCode);
   }
 
-  updateClient(newClient: ClientModel, id: number){
+  updateClient(changedClient: ClientModel): Observable<any>{
+    return this.http.post<any>(this.apiUrl + this.clientUpdateEndpoint, changedClient);
 
 }
 }

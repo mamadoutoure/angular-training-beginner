@@ -13,56 +13,47 @@ import {ConfirmationDialogService} from '../../shared/confirmation-dialog.servic
 })
 export class ClientUpdateComponent extends ClientBaseForm  implements OnInit {
 
-client = {
-  clientCode: 'CL-002',
-  firstName: 'Mamadou',
-  lastName: 'Toure',
-  dob: '2020-05-14',
-  pob: 'Kaedi',
-  address: {
-    rue: 'Armand-Viau',
-    ville: 'Quebec',
-    quartier: 'Val-Belair'
-  },
-  contacts: [
-    {
-      contactCode: 'CEL',
-      name: 'Cellulaire',
-      contactValue: '583-874-9898'
-    },
-    {
-      contactCode: 'EMA',
-      name: 'Email',
-      contactValue: 'mamadou.toure@yahoo.com'
-    }
-  ]
-};
+custCode: string;
 
 
   constructor(private clientService: ClientService,
-              private router: Router, private route: ActivatedRoute,
+              private router: Router, private activatedRoute: ActivatedRoute,
               private confDialog: ConfirmationDialogService) {
     super(confDialog);
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.activatedRoute.params.subscribe( parm => {
+      this.custCode = parm.id;
+      this.getClientDetail(this.custCode);
+    });
+  }
 
-    //const client: ClientModel = this.clientService.getClientById(+this.route.snapshot.params.id);
-    this.firstName.patchValue(this.client.firstName);
-    this.lastName.patchValue(this.client.lastName);
-    this.dob.patchValue(this.client.dob);
-    this.pob.patchValue(this.client.pob);
-    this.address.patchValue(this.client.address);
-    this.client.contacts.forEach((contact) => {
+  getClientDetail(customerCode: string): void{
+    this.clientService.getClientByCode(customerCode).subscribe(
+      (clientDetail) => {
+         this.assignForm(clientDetail);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  assignForm(client: ClientModel){
+    this.customerCode.patchValue(client.customerCode);
+    this.firstName.patchValue(client.firstName);
+    this.lastName.patchValue(client.lastName);
+    this.dob.patchValue(client.dob);
+    this.pob.patchValue(client.pob);
+    this.address.patchValue(client.address);
+    client.contacts.forEach((contact) => {
       this.contacts.push(this.createContact(contact.contactCode, contact.contactValue));
     });
-
   }
 
 
   onRemoveContactEntry(i){
-    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactType;
+    const message = 'Voulez-vous vraiment supprimer ? ' + this.contacts.at(i).value.contactCode;
     this.onRemoveEntry(message, i);
   }
 
@@ -71,8 +62,10 @@ client = {
     console.log(this.clientForm.value);
     let client: ClientModel;
     client = this.clientForm.value;
-    this.clientService.updateClient(this.clientForm.value, +this.route.snapshot.params.id);
-    this.router.navigate(['/client-list']);
+    this.clientService.updateClient(client).subscribe(
+      (resultat) => this.router.navigate(['/client-list']),
+      (error) => console.log(error)
+    );
 
   }
 

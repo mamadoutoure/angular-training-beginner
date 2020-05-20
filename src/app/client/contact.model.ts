@@ -1,4 +1,4 @@
 export interface ContactModel {
-  contactType: string;
+  contactCode: string;
   contactValue: string;
 }

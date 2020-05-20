@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
+import {CommandService} from '../command.service';
+import {CommandModel} from '../commande.model';
+import {CommandDtoModel} from '../commandeDto.model';
 
 @Component({
   selector: 'app-commande-list',
@@ -9,61 +12,33 @@ import {ConfirmationDialogService} from '../../shared/confirmation-dialog.servic
 })
 export class CommandeListComponent implements OnInit {
 
-  commandes =  [
-    {
-      commandCode: 2435,
-      client: {
-        clientCode: 3,
-        firstName: 'Mamadou',
-        lastName: 'Toure'
-      },
-      commandDate: '2020-05-11',
-      commandLineItems: [
-        {
-          productName: 'Orange',
-          productPrice: 15,
-          quantity: 5
-        },
-        {
-          productName: 'Pomme',
-          productPrice: 12.65,
-          quantity: 8
-        }
-        ]
-
-     },
-    {
-      commandCode: 7863,
-      client: {
-        clientCode: 6,
-        firstName: 'Fadel',
-        lastName: 'Toure'
-      },
-      commandDate: '2020-02-11',
-      commandLineItems: [
-        {
-          productName: 'Banane',
-          productPrice: 7.5,
-          quantity: 15
-        },
-        {
-          productName: 'Dattes',
-          productPrice: 8.95,
-          quantity: 6
-        }
-        ]
-    }
-    ];
-  constructor(private router: Router, private confirmationDialogService: ConfirmationDialogService) { }
+  commandes: CommandDtoModel[];
+  constructor(private router: Router,
+              private confirmationDialogService: ConfirmationDialogService,
+              private commandService: CommandService
+  ) { }
 
   ngOnInit(): void {
+    this.getCommandist();
+  }
+
+
+  getCommandist() {
+    this.commandService.getCommandList().subscribe(
+      (retour) => {
+        this.commandes = retour;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   totalCommandAmount(commadeLineItems: [any]): string {
 
-    const total =  commadeLineItems.reduce((accumulator, currentValue) =>
-      (accumulator.productPrice * accumulator.quantity) + (currentValue.productPrice * currentValue.quantity));
-    return total;
+    const total =  commadeLineItems.map(v => v.price * v.quantity).reduce((accumulator, currentValue) =>
+      accumulator + currentValue);
+    return total.toString();
   }
 
 
