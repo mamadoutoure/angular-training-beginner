@@ -18,8 +18,8 @@ import {CommandDtoModel} from './commandeDto.model';
 export class CommandService {
   apiUrl = environment.apiUrl;
   commandEndpoint = 'commands/';
-  commandCreateEndpoint = 'save/command/';
-  commandUpdateEndpoint = 'update/command/';
+  commandCreateEndpoint = 'command/';
+  commandUpdateEndpoint = 'commands/';
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,11 @@ export class CommandService {
   getCommandList(): Observable<CommandDtoModel[]> {
     return this.http.get<CommandDtoModel[]>(this.apiUrl + this.commandEndpoint);
 
+  }
+
+
+  removeCommand(commandCode): Observable<any>{
+    return this.http.delete<any>(this.apiUrl + this.commandEndpoint + commandCode);
   }
 
   createCommand(command: CommandModel){
@@ -38,4 +43,10 @@ export class CommandService {
   getCommandByCode(commandCode: string): Observable<CommandDtoModel>{
     return this.http.get<CommandDtoModel>(this.apiUrl + this.commandEndpoint + commandCode);
   }
+
+  updateCommand(changedCommand: CommandDtoModel, commandCode: string): Observable<any>{
+    return this.http.put<any>(this.apiUrl + this.commandUpdateEndpoint + commandCode, changedCommand);
+
+  }
+
 }

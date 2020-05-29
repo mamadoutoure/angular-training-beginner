@@ -104,7 +104,7 @@
 
             <select id="contact" class="form-control" [ngClass]="setError(contacts.at(i).get('contactCode'))" formControlName="contactCode">
               <option value="">Choisir un type de contact..</option>
-              <option  *ngFor="let contact of contactCategories" [ngValue]="contact.contactCode">{{contact.description}}</option>
+              <option  *ngFor="let contact of contactCategories" [value]="contact.contactCode">{{contact.contactName}}</option>
             </select>
           </div>
 

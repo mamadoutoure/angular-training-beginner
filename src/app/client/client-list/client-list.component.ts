@@ -46,11 +46,17 @@ export class ClientListComponent implements OnInit {
       .afterClosed().subscribe(response => {
         console.log(response);
         if (response) {
-          // appeler la suppression
-      } else {
-          // ne rien faire
-      }
-      // this.clientService.removeClient(clientId);
+          this.clientService.removeClient(customerCode).subscribe(
+            (retour) => {
+              this.getClientList();
+              //this.router.navigate(['/client-list']);
+            },
+            (error) => {
+              console.log(error);
+              this.getClientList();
+            }
+          );
+        }
 
     });
   }//

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ClientService} from '../client.service';
 
 @Component({
   selector: 'app-client-commands',
@@ -9,70 +10,55 @@ import {Router} from '@angular/router';
 export class ClientCommandsComponent implements OnInit {
 
 
-  clientCommandsDto  = {
-    customerCode: 'CLI-009',
-    clientName: 'Mamadou Toure',
-    commands: [
-      {
-        commandCode: '2344',
-        commandDate: '2020-05-19',
-        commandDetails: [
-          {
-            productName: 'Orange',
-            productPrice: 6.5,
-            quantity: 12
-          },
-          {
-            productName: 'Banane',
-            productPrice: 3.45,
-            quantity: 11
-          }
-        ]
-      },
+  clientCommandsDto: any;
 
-
-      {
-        commandCode: '6753',
-        commandDate: '2020-03-21',
-        commandDetails: [
-          {
-            productName: 'Mandarine',
-            productPrice: 3.5,
-            quantity: 7
-          },
-          {
-            productName: 'Goyave',
-            productPrice: 8.37,
-            quantity: 6
-          }
-        ]
-      }
-
-    ]
-  };
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private clientService: ClientService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe( parm => {
+      const customerCode = parm.id;
+      this.getClientCommands(customerCode);
+    });
   }
 
   totalCommandAmount(commadeLineItems: Array<any>): string {
 
-    const total =  commadeLineItems.reduce((accumulator, currentValue) =>
-      (accumulator.productPrice * accumulator.quantity) + (currentValue.productPrice * currentValue.quantity));
-    return total;
+    const total =  commadeLineItems.map(line => line.price * line.quantity).reduce((accumulator, currentValue) =>
+      accumulator + currentValue);
+    return total.toString();
   }
 
   totalCommands(commands: Array<any>){
-    const total =  commands.reduce((accumulator, currentValue) =>
-      (this.totalCommandAmount(accumulator.commandDetails)
-        + (this.totalCommandAmount(currentValue.commandDetails))));
+
+    const listCommand =  commands.map( commad =>  this.mapDetails(commad.commandLinesItems));
+
+
+    const total =  [].concat(...listCommand).reduce((accumulator, currentValue) =>
+      accumulator + currentValue);
     return total;
+  }
+
+  mapDetails(lineDetails){
+
+    return lineDetails.map( line =>   line.price * line.quantity);
   }
 
   displayDetailCommand(commandCode: string){
 
     this.router.navigate(['/commande-detail', commandCode]);
+  }
+
+  getClientCommands(customerCode: string){
+    this.clientService.getCommandsByClientCode(customerCode).subscribe(
+      (data) => {
+        this.clientCommandsDto = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

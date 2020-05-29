@@ -57,11 +57,17 @@ export class CommandeListComponent implements OnInit {
       .afterClosed().subscribe(response => {
       console.log(response);
       if (response) {
-        // appeler la suppression
-      } else {
-        // ne rien faire
+        this.commandService.removeCommand(code).subscribe(
+          (retour) => {
+            this.getCommandist();
+          },
+          (error) => {
+            console.log(error);
+            this.getCommandist();
+          }
+        );
       }
-      // this.clientService.removeClient(clientId);
+
 
     });
   }

@@ -1,4 +1,4 @@
-<div class="mt-3">
+<div *ngIf="clientCommandsDto" class="mt-3">
 
 
   <div class="card ">
@@ -18,7 +18,7 @@
           <label >client:</label>
         </div>
         <div class="col-md-3">
-          <h4>{{clientCommandsDto.clientName}}</h4>
+          <h4>{{clientCommandsDto.customerName}}</h4>
 
         </div>
       </div>
@@ -67,7 +67,7 @@
                 {{command.commandDate | date:'longDate': '':'fr'}}
               </td>
               <td class="float-right">
-                {{totalCommandAmount(command.commandDetails) | currency }}
+                {{totalCommandAmount(command.commandLinesItems) | currency }}
               </td>
 
 

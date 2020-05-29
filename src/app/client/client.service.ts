@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ClientModel} from './client.model';
 import {Observable, of} from 'rxjs';
-import {ContactModel} from './contact.model';
+import {ContactModel} from '../contact-type/contact.model';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
@@ -11,8 +11,8 @@ import {HttpClient} from '@angular/common/http';
 export class ClientService {
   apiUrl = environment.apiUrl;
   clientEndpoint = 'customers/';
-  clientCreateEndpoint = 'save/customer/';
-  clientUpdateEndpoint = 'update/customer/';
+  clientCreateEndpoint = 'customer/';
+  clientUpdateEndpoint = 'customer/';
 
 
   constructor(private http: HttpClient) { }
@@ -27,7 +27,8 @@ export class ClientService {
 
   }
 
-  removeClient(clientId){
+  removeClient(customerCode): Observable<any>{
+    return this.http.delete<any>(this.apiUrl + this.clientEndpoint + customerCode);
 
   }
 
@@ -35,8 +36,14 @@ export class ClientService {
     return this.http.get<ClientModel>(this.apiUrl + this.clientEndpoint + customerCode);
   }
 
-  updateClient(changedClient: ClientModel): Observable<any>{
-    return this.http.post<any>(this.apiUrl + this.clientUpdateEndpoint, changedClient);
+  updateClient(changedClient: ClientModel, customerCode: string): Observable<any>{
+    return this.http.put<any>(this.apiUrl + this.clientUpdateEndpoint + customerCode, changedClient);
 
+  }
+
+  getCommandsByClientCode(customerCode: string): Observable<any> {
+
+      return this.http.get<any>(this.apiUrl + this.clientEndpoint + customerCode + '/commands');
+  }
 }
-}
+

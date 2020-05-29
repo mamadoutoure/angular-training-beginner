@@ -20,6 +20,7 @@ import { CommandeUpdateComponent } from './commande/commande-update/commande-upd
 import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
 import { ClientCommandsComponent } from './client/client-commands/client-commands.component';
 import {SharedModule} from './shared/shared.module';
+import { ContactTypeComponent } from './contact-type/contact-type.component';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -35,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
     CommandeUpdateComponent,
     CommandeDetailComponent,
     ClientCommandsComponent,
+    ContactTypeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,20 @@
 import {OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationDialogService} from '../shared/confirmation-dialog.service';
+import {ContactTypeService} from '../contact-type/contact-type.service';
+import {ClientModel} from './client.model';
+import {ContactModel} from '../contact-type/contact.model';
+import {ContactTypeModel} from '../contact-type/contactType.model';
 
 export class ClientBaseForm{
   clientForm: FormGroup;
-  contactCategories = [
-    {contactCode: 'CEL', description: 'Cellulaire'},
-    {contactCode: 'TEL', description: 'Fixe'},
-    {contactCode: 'SKY', description: 'Skype'},
-    {contactCode: 'EMA', description: 'Email'},
-    {contactCode: 'WHA', description: 'Whatsapp'},
-    {contactCode: 'FAC', description: 'FaceTime'}
-  ];
-  constructor(private confirmationDialogService: ConfirmationDialogService){}
+  contactCategories: ContactTypeModel[];
+  constructor(private confirmationDialogService: ConfirmationDialogService, private contactTypeService: ContactTypeService){
+    this.contactTypeService.getContactTypes().subscribe(
+      (data) => {this.contactCategories = data},
+      (error) => console.log(error)
+    );
+  }
 
 
   createForm(){

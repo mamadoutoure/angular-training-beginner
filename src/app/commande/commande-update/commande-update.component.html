@@ -30,11 +30,8 @@
 
           <div class="col-md-3">
             <select class="form-control" formControlName="customerCode">
-              <option value="1">Mamadou Toure</option>
-              <option value="2">Joseph Ade</option>
-              <option value="3">Fadel Toure</option>
-              <option value="4">Mahmoud Toure</option>
-              <option value="5">Ibrahim Toure</option>
+              <option *ngFor="let cli of clientList" [value]="cli.customerCode">{{cli.firstName}} {{cli.lastName}}</option>
+
               <!--option  *ngFor="let contact of contactCategories" [ngValue]="contact.code">{{contact.description}}</option-->
             </select>
           </div>
@@ -59,7 +56,7 @@
         </div>
 
 
-        <div class="form-group row" formArrayName="commandDetails"
+        <div class="form-group row" formArrayName="commandLinesItems"
              *ngFor="let item of commandLinesItems.controls; let i = index;">
 
           <ng-container [formGroupName]="i">
@@ -67,7 +64,7 @@
 
               <select  id="contact" class="form-control" formControlName="productCode">
                 <option value="">Choisir un produit.</option>
-                <option  *ngFor="let product of products" [ngValue]="product.code">{{product.productName}}</option>
+                <option  *ngFor="let product of products" [value]="product.productCode">{{product.productName}}</option>
               </select>
             </div>
 
@@ -80,7 +77,7 @@
             </div>
 
             <div class="col-2">
-              <button type="button" class="btn btn-outline-danger" (click)="onRemoveCommandDetailEntry(i)"><i class="fa fa-trash"></i></button>
+              <button type="button"  class="btn btn-outline-danger" (click)="onRemoveCommandDetailEntry(i)"><i class="fa fa-trash"></i></button>
             </div>
 
           </ng-container>
@@ -105,5 +102,6 @@
 
 
 </div>
+
 
 

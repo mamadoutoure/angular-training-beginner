@@ -5,6 +5,7 @@ import {ClientService} from '../client.service';
 import {Router} from '@angular/router';
 import {ClientBaseForm} from '../client-base-form';
 import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
+import {ContactTypeService} from '../../contact-type/contact-type.service';
 
 @Component({
   selector: 'app-client-create',
@@ -14,8 +15,8 @@ import {ConfirmationDialogService} from '../../shared/confirmation-dialog.servic
 export class ClientCreateComponent extends ClientBaseForm  implements OnInit {
   constructor(private clientService: ClientService,
               private router: Router,
-              private confDialog: ConfirmationDialogService) {
-    super(confDialog);
+              private confDialog: ConfirmationDialogService, private cTypeService: ContactTypeService) {
+  super(confDialog, cTypeService);
   }
 
 

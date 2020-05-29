@@ -5,6 +5,7 @@ import {ClientService} from '../client.service';
 import {ClientModel} from '../client.model';
 import {ClientBaseForm} from '../client-base-form';
 import {ConfirmationDialogService} from '../../shared/confirmation-dialog.service';
+import {ContactTypeService} from '../../contact-type/contact-type.service';
 
 @Component({
   selector: 'app-client-update',
@@ -18,8 +19,9 @@ custCode: string;
 
   constructor(private clientService: ClientService,
               private router: Router, private activatedRoute: ActivatedRoute,
-              private confDialog: ConfirmationDialogService) {
-    super(confDialog);
+              private confDialog: ConfirmationDialogService,
+              private cTypeService: ContactTypeService) {
+    super(confDialog, cTypeService);
   }
 
   ngOnInit(): void {
@@ -62,7 +64,7 @@ custCode: string;
     console.log(this.clientForm.value);
     let client: ClientModel;
     client = this.clientForm.value;
-    this.clientService.updateClient(client).subscribe(
+    this.clientService.updateClient(client, this.custCode).subscribe(
       (resultat) => this.router.navigate(['/client-list']),
       (error) => console.log(error)
     );

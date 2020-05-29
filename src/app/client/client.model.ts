@@ -1,4 +1,4 @@
-import {ContactModel} from './contact.model';
+import {ContactModel} from '../contact-type/contact.model';
 import {AddressModel} from '../address/address.model';
 
 export interface ClientModel {

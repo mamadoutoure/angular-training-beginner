@@ -11,7 +11,7 @@ import {ProductModel} from './product.model';
 export class ProductService {
 
   apiUrl = environment.apiUrl;
-  productEndpoint = 'product/';
+  productEndpoint = 'products/';
 
 
 
