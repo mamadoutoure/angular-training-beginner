@@ -63,10 +63,10 @@ export class ClientListComponent implements OnInit {
 
   editClient(code) {
 
-    this.router.navigate(['/client-edit', code]);
+    this.router.navigate(['/clients', 'client-edit', code]);
   }
 
   displayOrder(code) {
-    this.router.navigate(['/client-commands', code]);
+    this.router.navigate(['/clients', 'client-commands', code]);
   }
 }

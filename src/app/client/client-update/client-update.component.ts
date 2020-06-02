@@ -65,7 +65,7 @@ custCode: string;
     let client: ClientModel;
     client = this.clientForm.value;
     this.clientService.updateClient(client, this.custCode).subscribe(
-      (resultat) => this.router.navigate(['/client-list']),
+      (resultat) => this.router.navigate(['/clients', 'client-list']),
       (error) => console.log(error)
     );
 

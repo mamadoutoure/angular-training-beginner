@@ -31,7 +31,7 @@ export class ClientCreateComponent extends ClientBaseForm  implements OnInit {
     client = this.clientForm.value;
     client.customerCode = 'CLI-' + Date.now();
     this.clientService.createClient(client).subscribe(
-      (resultat) => this.router.navigate(['/client-list']),
+      (resultat) => this.router.navigate(['/clients', 'client-list']),
         (error) => console.log(error)
     );
 

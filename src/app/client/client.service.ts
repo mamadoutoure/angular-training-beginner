@@ -5,9 +5,7 @@ import {ContactModel} from '../contact-type/contact.model';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientService {
   apiUrl = environment.apiUrl;
   clientEndpoint = 'customers/';

@@ -44,11 +44,11 @@ export class CommandeListComponent implements OnInit {
 
 
   editCommand(code: string){
-    this.router.navigate(['/commande-edit', code]);
+    this.router.navigate(['/commandes', 'commande-edit', code]);
   }
 
   displayCommand(code){
-    this.router.navigate(['/commande-detail', code]);
+    this.router.navigate(['/commandes', 'commande-detail', code]);
   }
 
   removeCommand(code: string){

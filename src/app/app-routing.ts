@@ -11,39 +11,23 @@ import {ClientCommandsComponent} from './client/client-commands/client-commands.
 
 
 export const APP_ROUTES: Routes = [
-  {path: '', redirectTo: 'client-list', pathMatch: 'full'},
+  {path: '', redirectTo: 'clients', pathMatch: 'full'},
+
   {
-    path: 'client-list', component: ClientListComponent
-  },
-  {
-    path: 'client-create', component: ClientCreateComponent
-  },
-  {
-    path: 'client-edit/:id', component: ClientUpdateComponent
+    path: 'clients',
+    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
   },
 
   {
-    path: 'client-detail/:id', component: ClientDetailComponent
-  },
-  {
-    path: 'client-commands/:id', component: ClientCommandsComponent
-  },
-  {
-    path: 'commande-create', component: CommandeCreateComponent
-  },
-  {
-    path: 'commande-edit/:id', component: CommandeUpdateComponent
-  },
-  {
-    path: 'commande-detail/:id', component: CommandeDetailComponent
-  },
-  {
-    path: 'commande-list', component: CommandeListComponent
+    path: 'commandes',
+    loadChildren: () => import('./commande/commande.module').then(m => m.CommandeModule)
   },
 
-  {path: '**', redirectTo: 'list', pathMatch: 'full'}
+  {path: '**', redirectTo: '/clients', pathMatch: 'full'}
 
 ];
 export class AppRouting {
 
 }
+
+

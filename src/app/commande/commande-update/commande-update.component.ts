@@ -67,7 +67,7 @@ export class CommandeUpdateComponent  extends CommandeBaseForm implements OnInit
     let command: CommandDtoModel;
     command = this.commandForm.value;
     this.commandService.updateCommand(command, this.commCode).subscribe(
-      (resultat) => this.router.navigate(['/commande-list']),
+      (resultat) => this.router.navigate(['/commandes', 'commande-list']),
       (error) => console.log(error)
     );
 

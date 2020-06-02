@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ConfirmationDialogService} from './confirmation-dialog.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {BsDatepickerConfig, BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 
 
@@ -10,12 +13,32 @@ import {ConfirmationDialogService} from './confirmation-dialog.service';
 @NgModule({
   declarations: [ConfirmationDialogComponent],
   imports: [
-    CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    BsDatepickerModule.forRoot()
+
   ],
-  exports: [ConfirmationDialogComponent],
-  providers: [ConfirmationDialogService],
+  exports: [ConfirmationDialogComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    BsDatepickerModule,
+    HttpClientModule],
+  providers: [ConfirmationDialogService, { provide: BsDatepickerConfig, useFactory: getDatepickerConfig }],
   entryComponents: [ConfirmationDialogComponent]
 
 })
+
+
 export class SharedModule { }
+
+
+export function getDatepickerConfig(): BsDatepickerConfig {
+  return Object.assign(new BsDatepickerConfig(), {
+    dateInputFormat: 'YYYY-MM-DD',
+    containerClass: 'theme-dark-blue',
+    isAnimated: true,
+
+  });
+}
+
+

@@ -34,7 +34,6 @@ export class ClientCommandsComponent implements OnInit {
 
     const listCommand =  commands.map( commad =>  this.mapDetails(commad.commandLinesItems));
 
-
     const total =  [].concat(...listCommand).reduce((accumulator, currentValue) =>
       accumulator + currentValue);
     return total;
