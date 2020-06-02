@@ -5,9 +5,7 @@ import {Observable} from 'rxjs';
 import {ClientModel} from '../client/client.model';
 import {ProductModel} from './product.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductService {
 
   apiUrl = environment.apiUrl;

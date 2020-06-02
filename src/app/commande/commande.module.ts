@@ -7,6 +7,8 @@ import {CommandeDetailComponent} from './commande-detail/commande-detail.compone
 import {SharedModule} from '../shared/shared.module';
 import {CommandeRoutingModule} from './commande-routing.module';
 import {CommandService} from './command.service';
+import {ClientService} from '../client/client.service';
+import {ProductService} from '../product/product.service';
 
 
 
@@ -23,6 +25,6 @@ import {CommandService} from './command.service';
     SharedModule,
     CommandeRoutingModule,
   ],
-  providers: [CommandService]
+  providers: [CommandService, ClientService, ProductService]
 })
 export class CommandeModule { }

@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {ClientRoutingModule} from './client-routing.module';
 import {ClientService} from './client.service';
+import {ContactTypeService} from '../contact-type/contact-type.service';
 
 
 
@@ -32,6 +33,6 @@ import {ClientService} from './client.service';
    // CommonModule
 
   ],
-  providers: [ClientService]
+  providers: [ClientService, ContactTypeService]
 })
 export class ClientModule { }

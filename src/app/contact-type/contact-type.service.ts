@@ -4,9 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ContactTypeModel} from './contactType.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ContactTypeService {
   apiUrl = environment.apiUrl;
   contactTypeEndpoint = 'contact-types/';
